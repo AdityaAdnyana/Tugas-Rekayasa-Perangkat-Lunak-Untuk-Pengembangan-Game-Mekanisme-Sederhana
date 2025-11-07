@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://defyq8goaa7iu"]
+
+[ext_resource type="Script" uid="uid://bfl3hifxj0jva" path="res://script/Player.gd" id="1_62i1b"]
+[ext_resource type="Texture2D" uid="uid://cnv6gnfil475d" path="res://asset/art/external/kenney_pixel-platformer/Tilemap/tilemap-characters_packed.png" id="2_y30ri"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xesoj"]
+atlas = ExtResource("2_y30ri")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_53ndp"]
+atlas = ExtResource("2_y30ri")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_70cbr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xesoj")
+}],
+"loop": true,
+"name": &"die",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_53ndp")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_53ndp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xesoj")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lsoxn"]
+radius = 7.0
+height = 20.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_62i1b")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_70cbr")
+animation = &"die"
+autoplay = "die"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_lsoxn")
